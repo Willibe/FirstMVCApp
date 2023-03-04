@@ -22,8 +22,8 @@ namespace FirstMVCApp.Repositories
 
         public void Delete(Guid guid)
         {
-            CodeSnippetModel codeSnippetModel = GetById(guid);
-            _context.CodeSnippets.Remove(codeSnippetModel);
+            CodeSnippetModel model = GetById(guid);
+            _context.CodeSnippets.Remove(model);
             _context.SaveChanges();
         }
 
@@ -34,8 +34,8 @@ namespace FirstMVCApp.Repositories
 
         public CodeSnippetModel GetById(Guid guid)
         {
-            CodeSnippetModel codeSnippetModel = _context.CodeSnippets.FirstOrDefault(c => c.IdCodeSnippet == guid);
-            return codeSnippetModel;
+            CodeSnippetModel model = _context.CodeSnippets.FirstOrDefault(c => c.IdCodeSnippet == guid);
+            return model;
         }
 
         public void Update(CodeSnippetModel model)

@@ -1,6 +1,5 @@
 ﻿using FirstMVCApp.Models;
 using FirstMVCApp.Repositories;
-using Microsoft.AspNetCore.Mvc;
 using FirstMVCApp.ControllerModel;
 
 namespace FirstMVCApp.Controllers
@@ -9,8 +8,6 @@ namespace FirstMVCApp.Controllers
     {
 
         public MembershipTypesController(IClubDataRepository<MembershipTypeModel> repository) : base(repository)  { }
-
-
 
     }
 }

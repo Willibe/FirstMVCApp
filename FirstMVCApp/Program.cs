@@ -21,6 +21,7 @@ namespace FirstMVCApp
             builder.Services.AddTransient<IClubDataRepository<MemberModel>, MembersRepository>();
             builder.Services.AddTransient<IClubDataRepository<MembershipTypeModel>, MembershipTypesRepository>();
             builder.Services.AddTransient<IClubDataRepository<CodeSnippetModel>, CodeSnippetRepository>();
+            builder.Services.AddTransient<IClubDataRepository<MembershipModel>, MembershipsRepository>();
             builder.Services.AddControllersWithViews();
 
 

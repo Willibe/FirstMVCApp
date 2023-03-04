@@ -1,7 +1,5 @@
 ﻿using FirstMVCApp.Models;
 using FirstMVCApp.Repositories;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using FirstMVCApp.ControllerModel;
 
 
