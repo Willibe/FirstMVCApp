@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirstMVCApp.ControllerModel
 {
-    public partial class DefaultController<T> : Controller where T : class, new()
+    public class DefaultController<TEntity, TRepository> : Controller where TEntity : class, new() where TRepository : IClubDataRepository<TEntity>
     {
-        protected readonly IClubDataRepository<T> _repository;
+        protected readonly TRepository _repository;
 
-        public DefaultController(IClubDataRepository<T> repository)
+        public DefaultController(TRepository repository)
         {
             _repository = repository;
         }
+
 
         public virtual IActionResult Index()
         {
@@ -26,7 +27,7 @@ namespace FirstMVCApp.ControllerModel
         [HttpPost]
         public virtual IActionResult Create(IFormCollection collection)
         {
-            T model = new T();
+            TEntity model = new TEntity();
             TryUpdateModelAsync(model); // 1-1 Mapping from collection object to the model object
             _repository.Add(model);
             return RedirectToAction("Index");
@@ -35,14 +36,14 @@ namespace FirstMVCApp.ControllerModel
 
         public virtual IActionResult Edit(Guid id)
         {
-            T model = _repository.GetById(id);
+            TEntity model = _repository.GetById(id);
             return View("Edit", model);
         }
 
         [HttpPost]
         public virtual IActionResult Edit(Guid id, IFormCollection collection)
         {
-            T model = new T();
+            TEntity model = new TEntity();
             TryUpdateModelAsync(model);
             _repository.Update(model);
             return RedirectToAction("Index");
@@ -51,7 +52,7 @@ namespace FirstMVCApp.ControllerModel
         [HttpGet]
         public virtual IActionResult Delete(Guid id)
         {
-            T model = _repository.GetById(id);
+            TEntity model = _repository.GetById(id);
             return View("Delete", model);
         }
 
@@ -66,7 +67,7 @@ namespace FirstMVCApp.ControllerModel
 
         public virtual IActionResult Details(Guid id)
         {
-            T announcement = _repository.GetById(id);
+            TEntity announcement = _repository.GetById(id);
             return View("Details", announcement);
         }
     }

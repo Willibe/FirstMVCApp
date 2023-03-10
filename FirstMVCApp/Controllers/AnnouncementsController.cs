@@ -1,13 +1,14 @@
-﻿using FirstMVCApp.ControllerModel;
+﻿using FirstMVCApp.Repositories;
+using FirstMVCApp.ControllerModel;
 using FirstMVCApp.Models;
-using FirstMVCApp.Repositories;
+using FirstMVCApp.RepoUnitOfWork;
 
 namespace FirstMVCApp.Controllers
 {
-    public class AnnouncementsController : DefaultController<AnnouncementModel>
+    public class AnnouncementsController : DefaultController<AnnouncementModel, AnnouncementsRepository>
     {
 
-        public AnnouncementsController(IClubDataRepository<AnnouncementModel> repository): base(repository) { }
+        public AnnouncementsController(UnitOfWork unitOfWork): base(unitOfWork.AnnouncementsRepository) { }
 
     }
 }

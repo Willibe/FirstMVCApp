@@ -1,7 +1,9 @@
 using FirstMVCApp.DataContext;
 using FirstMVCApp.Models;
 using FirstMVCApp.Repositories;
+using FirstMVCApp.RepoUnitOfWork;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace FirstMVCApp
 {
@@ -17,13 +19,16 @@ namespace FirstMVCApp
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"))
             );
 
-            builder.Services.AddTransient<IClubDataRepository<AnnouncementModel>, AnnouncementsRepository>();
-            builder.Services.AddTransient<IClubDataRepository<MemberModel>, MembersRepository>();
-            builder.Services.AddTransient<IClubDataRepository<MembershipTypeModel>, MembershipTypesRepository>();
-            builder.Services.AddTransient<IClubDataRepository<CodeSnippetModel>, CodeSnippetRepository>();
-            builder.Services.AddTransient<IClubDataRepository<MembershipModel>, MembershipsRepository>();
+            builder.Services.AddTransient<UnitOfWork>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAuth0WebAppAuthentication(
+                options =>
+                {
+                    options.Domain = builder.Configuration["Auth0:Domain"];
+                    options.ClientId = builder.Configuration["Auth0:ClientId"];
+                }
+                );
 
             var app = builder.Build();
 
@@ -35,6 +40,9 @@ namespace FirstMVCApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

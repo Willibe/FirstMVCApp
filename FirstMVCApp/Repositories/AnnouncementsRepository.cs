@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-
 namespace FirstMVCApp.Repositories
 {
     // Repository Pattern! Classes that implement CRUD operations on DB on behalf of the controller
@@ -45,9 +44,14 @@ namespace FirstMVCApp.Repositories
 
         public void Delete(Guid guid)
         { 
+
             AnnouncementModel announcement = GetById(guid);
-            _contex.Announcements.Remove(announcement);
-            _contex.SaveChanges();
+            if (announcement != null)
+            {
+                _contex.Announcements.Remove(announcement);
+                _contex.SaveChanges();
+            }
+
         }
     }
 }

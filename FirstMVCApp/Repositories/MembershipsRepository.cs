@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FirstMVCApp.Repositories
 {
-    public class MembershipsRepository : IClubDataRepository<MembershipModel>
+    public class MembershipsRepository :  IClubDataRepository<MembershipModel>
     {
         private readonly ClubDataContext _context;
 

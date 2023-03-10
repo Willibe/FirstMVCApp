@@ -1,13 +1,14 @@
 ﻿using FirstMVCApp.Models;
-using FirstMVCApp.Repositories;
 using FirstMVCApp.ControllerModel;
+using FirstMVCApp.Repositories;
+using FirstMVCApp.RepoUnitOfWork;
 
 namespace FirstMVCApp.Controllers
 {
-    public class MembershipTypesController : DefaultController<MembershipTypeModel>
+    public class MembershipTypesController : DefaultController<MembershipTypeModel, MembershipTypesRepository>
     {
 
-        public MembershipTypesController(IClubDataRepository<MembershipTypeModel> repository) : base(repository)  { }
+        public MembershipTypesController(UnitOfWork unitOfWork) : base(unitOfWork.MembershipTypesRepository)  { }
 
     }
 }

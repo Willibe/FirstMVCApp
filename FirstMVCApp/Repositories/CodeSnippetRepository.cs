@@ -16,7 +16,7 @@ namespace FirstMVCApp.Repositories
         public void Add(CodeSnippetModel model)
         {
             model.IdCodeSnippet = Guid.NewGuid();
-            _context.Entry(model).State = EntityState.Added; // Same as _context.Add(model);
+            _context.Add(model); // Same as _context.Add(model);
             _context.SaveChanges();
         }
 
